@@ -1,9 +1,21 @@
 import axios, { AxiosResponse } from 'axios';
 
+const axiosApi = axios.create({
+  timeout: 1000,
+});
+
+
 interface Driver {
   id: number;
   name: string;
   team: string;
+}
+
+interface Constructors {
+  constructorId: number;
+  url: string;
+  name: string;
+  country: string;
 }
 
 export default {
@@ -15,5 +27,9 @@ export default {
       console.error(error);
       return [];
     }
+
+  },
+  constructors(): Promise<AxiosResponse<string>> {
+    return axiosApi.get(`/constructors`);
   },
 };
