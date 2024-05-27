@@ -1,11 +1,6 @@
 <template>
   <div>
     <h1>Drivers</h1>
-    <ul>
-      <li v-for="driver in drivers" :key="driver.id">
-        {{ driver.name }} ({{ driver.team }})
-      </li>
-    </ul>
   </div>
 </template>
 

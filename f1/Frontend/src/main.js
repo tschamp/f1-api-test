@@ -1,7 +1,20 @@
-import { createApp } from 'vue';
+import {createApp} from 'vue'
 import App from './App.vue'
-import router from './router/index.ts'
+
+// Import Vue Router
+import {createRouter, createWebHistory} from 'vue-router'
+import DriversDashboard from './views/Drivers.vue'
 
 
+// Create router instance
+const router = createRouter({
+    history: createWebHistory(),
+    routes: [
+        // Define routes
+        {path: '/', component: App},
+        {path: '/drivers', component: DriversDashboard},
+    ]
+})
 
-createApp(App).use(router).mount('#app');
+// Mount the app with router
+createApp(App).use(router).mount('#app')

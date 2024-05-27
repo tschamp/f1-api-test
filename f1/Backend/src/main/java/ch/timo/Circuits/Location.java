@@ -2,7 +2,7 @@ package ch.timo.Circuits;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-class Location {
+public class Location {
 
     @JsonProperty("lat")
     private String lat;
