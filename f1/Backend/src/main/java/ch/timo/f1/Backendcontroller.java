@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class Backendcontroller {
 
-    @GetMapping("/drivers")
+    @GetMapping(value = "/drivers")
     public String getDrivers() throws IOException, InterruptedException {
         // Define the URL of the JSON file
-        String fileUrl = "http://ergast.com/api/f1/2023/drivers.json";
+        String fileUrl = "http://ergast.com/api/f1/drivers.json";
 
         // Create a new HttpClient
         HttpClient client = HttpClient.newHttpClient();

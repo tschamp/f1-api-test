@@ -1,6 +1,7 @@
 import {createApp} from 'vue'
 import App from './App.vue'
 
+
 // Import Vue Router
 import {createRouter, createWebHistory} from 'vue-router'
 import DriversDashboard from './views/Drivers.vue'
