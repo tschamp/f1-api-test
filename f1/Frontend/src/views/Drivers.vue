@@ -1,5 +1,4 @@
 <template>
-
   <body>
     <div class="dashboard">
       <div class="main-content">
@@ -91,7 +90,7 @@ export default {
   .section h2 {
     border-bottom: 2px solid #c30000;
     padding-bottom: 0.5rem;
-    font-size: 1.5rem; /* added font size */
+    font-size: 4rem; /* added font size */
     font-weight: bold; /* added font weight */
     margin-top: 0; /* added margin top */
   }
@@ -122,6 +121,7 @@ export default {
   .driver:hover {
     transform: scale(1.05); /* added hover effect */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* added hover box shadow */
+    background-color: #c30000;
   }
 
   .driver-info {

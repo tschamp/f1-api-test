@@ -2,7 +2,7 @@ import axios from "axios";
 
 class DriverService {
   getDrivers() {
-    return axios.get('http://ergast.com/api/f1/2024/drivers.json');
+    return axios.get('http://localhost:8081/drivers');
   }
 }
 

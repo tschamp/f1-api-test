@@ -4,6 +4,13 @@ const axiosApi = axios.create({
   timeout: 1000,
 });
 
+interface Circuit {
+ name: string;
+ location: string;
+ lat: string;
+ long: string;
+}
+
 
 interface Driver {
   id: number;
@@ -29,7 +36,15 @@ export default {
     }
 
   },
-  constructors(): Promise<AxiosResponse<string>> {
-    return axiosApi.get(`/constructors`);
+  async getCircuit(): Promise<Circuit[]> {
+    try {
+      const response: AxiosResponse = await axios.get('http://localhost:8080/circuits');
+      return response.data;
+    } catch (error) {
+      console.error(error);
+      return [];
+    }
+
   },
+
 };
