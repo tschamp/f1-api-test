@@ -3,7 +3,7 @@
     <div class="dashboard">
       <div class="main-content">
         <section id="drivers" class="section">
-          <h2>Drivers</h2>
+          <h1>Drivers</h1>
           <div class="content-wrapper">
             <div class="drivers-box">
               <div v-for="driver in drivers" :key="driver.driverId" class="driver">
@@ -17,9 +17,6 @@
                       class="image-container"> </div>
                 </div>
               </div>
-            </div>
-            <div class="image-container">
-
             </div>
           </div>
         </section>
@@ -55,82 +52,79 @@ export default {
 </script>
 
 <style scoped>
-  html {
-    background-color: #000;
-    font-size: 16px; /* added font size */
-  }
+  
+body {
+  font-family: Arial, sans-serif;
+  background-color: #000;
+  color: #fff;
+  overflow-x: hidden;
+}
 
-  body {
-    font-family: Arial, sans-serif;
-    background-color: #000;
-    color: #fff;
-    overflow-x: hidden; /* added to prevent horizontal scrolling */
-  }
+.section {
+  background-color: #000;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
 
-  .section {
-    margin: 2rem auto; /* added margin top and bottom */
-    background-color: #000;
-    padding: 2rem; /* added padding */
-    border-radius: 10px; /* added border radius */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* added box shadow */
-  }
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
 
-  .dashboard {
-    display: flex;
-    flex-direction: column;
-    height: 100vh; /* added full height */
-  }
 
-  .main-content {
-    flex: 1;
-    overflow-y: auto;
-    padding: 2rem; /* added padding */
-  }
+.main-content {
+  flex: 1;
+  overflow-y: auto;
+}
 
-  .section h2 {
-    border-bottom: 2px solid #c30000;
-    padding-bottom: 0.5rem;
-    font-size: 4rem; /* added font size */
-    font-weight: bold; /* added font weight */
-    margin-top: 0; /* added margin top */
-  }
+.section h1 {
+  border-bottom: 2px solid #c30000;
+  padding-bottom: 0.5rem;
+  font-size: 4rem;
+  font-weight: bold;
+  margin-top: 0;
+  color: white;
+}
 
-  .content-wrapper {
-    display: flex;
-    flex-wrap: wrap; /* added flex wrap */
-    justify-content: center; /* added justify content */
-  }
+.content-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
 
-  .drivers-box {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    justify-content: center; /* added justify content */
-  }
+.drivers-box {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
 
-  .driver {
-    background-color: #222;
-    padding: 1rem; /* changed padding top to padding */
-    margin-right: auto;
-    margin-left: auto;
-    border-radius: 10px;
-    width: 30%;
-    transition: all 0.3s ease-in-out; /* added transition */
-  }
+.driver {
+  background-color: #222;
+  padding: 1rem;
+  margin-right: auto;
+  margin-left: auto;
+  border-radius: 10px;
+  width: 30%;
+  transition: all 0.3s ease-in-out;
+}
 
-  .driver:hover {
-    transform: scale(1.05); /* added hover effect */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* added hover box shadow */
-    background-color: #c30000;
-  }
+.driver:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  background-color: #c30000;
+}
 
-  .driver-info {
-    color: #fff;
-  }
+.driver-info {
+  color: #fff;
+  font-size: 20px;
+}
 
-  .driver-info div {
-    margin-bottom: 0.5rem; /* changed margin bottom */
-  }
+.driver-info div {
+  margin-bottom: 0.5rem;
+}
 
   .image-container {
     width: 150px;

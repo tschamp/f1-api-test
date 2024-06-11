@@ -46,5 +46,14 @@ export default {
     }
 
   },
+  async getConstructors(): Promise<Circuit[]> {
+    try {
+      const response: AxiosResponse = await axios.get('http://localhost:8080/constructors');
+      return response.data;
+    } catch (error) {
+      console.error(error);
+      return [];
+    }
 
+  },
 };

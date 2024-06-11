@@ -1,4 +1,4 @@
-<template>
+<template class = "htmls">
     <div class="dashboard">
       <div class="main-content">
         <section id="circuits" class="section">
@@ -11,6 +11,8 @@
                   <div><strong>Location:</strong> {{ circuit.Location.locality }}, {{ circuit.Location.country }}</div>
                   <div><strong>Latitude:</strong> {{ circuit.Location.lat }}</div>
                   <div><strong>Longitude:</strong> {{ circuit.Location.long }}</div>
+                  <div> <img :src="require(`@/Countrypicture/${circuit.Location.country}.png`)" alt="Country Image of Circuit"
+                    class="image-container"> </div>
                 </div>
               </div>
             </div>
@@ -36,7 +38,7 @@
       fetchCircuits() {
         CircuitService.getCircuit()
           .then(response => {
-            this.circuit = response.data.MRData.CircuitTable.Circuits;
+            this.circuits = response.data.MRData.CircuitTable.Circuits;
           })
           .catch(error => {
             console.error("There was an error fetching the circuit!", error);
@@ -47,10 +49,6 @@
   </script>
   
   <style scoped>
-  html {
-    background-color: #000;
-    font-size: 16px;
-  }
   
   body {
     font-family: Arial, sans-serif;
@@ -60,7 +58,6 @@
   }
   
   .section {
-    margin: 2rem auto;
     background-color: #000;
     padding: 2rem;
     border-radius: 10px;
@@ -72,11 +69,11 @@
     flex-direction: column;
     height: 100vh;
   }
-  
+
+
   .main-content {
     flex: 1;
     overflow-y: auto;
-    padding: 2rem;
   }
   
   .section h1 {
@@ -119,6 +116,7 @@
   
   .circuit-info {
     color: #fff;
+    font-size: 20px;
   }
   
   .circuit-info div {
@@ -126,9 +124,7 @@
   }
   
   .image-container {
-    width: 150px;
     height: 150px;
-    border-radius: 50%;
     overflow: hidden;
     margin: 1rem auto;
   }
