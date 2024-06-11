@@ -1,6 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
 
 const axiosApi = axios.create({
+  baseURL: 'API',
   timeout: 1000,
 });
 

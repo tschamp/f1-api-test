@@ -7,6 +7,7 @@ import {createRouter, createWebHistory} from 'vue-router'
 import DriversDashboard from './views/Drivers.vue'
 import CircuitDashboard from './views/Circuits.vue'
 import ConstructorsDashboard from './views/Constructors.vue'
+import Dashboard from './views/Dashboard.vue'
 
 
 // Create router instance
@@ -14,7 +15,7 @@ const router = createRouter({
     history: createWebHistory(),
     routes: [
         // Define routes
-        {path: '/', component: App},
+        {path: '/', component: Dashboard},
         {path: '/drivers', component: DriversDashboard},
         {path: '/circuits', component: CircuitDashboard},
         {path: '/constructors', component: ConstructorsDashboard},
