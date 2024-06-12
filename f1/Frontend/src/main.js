@@ -8,6 +8,7 @@ import DriversDashboard from './views/Drivers.vue'
 import CircuitDashboard from './views/Circuits.vue'
 import ConstructorsDashboard from './views/Constructors.vue'
 import Dashboard from './views/Dashboard.vue'
+import Race from './views/Race.vue'
 
 
 // Create router instance
@@ -19,6 +20,7 @@ const router = createRouter({
         {path: '/drivers', component: DriversDashboard},
         {path: '/circuits', component: CircuitDashboard},
         {path: '/constructors', component: ConstructorsDashboard},
+        {path: '/race', component: RaceDashboard},
     ]
 })
 

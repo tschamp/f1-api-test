@@ -79,4 +79,26 @@ public class Backendcontroller {
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(response.body());
     }
+
+    @GetMapping(value = "/race", produces = "application/json")
+    public ResponseEntity<String> getRace() throws IOException, InterruptedException {
+        // Define the URL of the JSON file
+        String fileUrl = "http://ergast.com/api/f1/current.json";
+
+        // Create a new HttpClient
+        HttpClient client = HttpClient.newHttpClient();
+
+        // Create a new HttpRequest
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(fileUrl))
+                .build();
+
+        // Send the request and get the response
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+        // Return the response body directly
+        return ResponseEntity.ok()
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(response.body());
+    }
 }

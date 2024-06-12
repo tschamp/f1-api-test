@@ -2,7 +2,9 @@
   <div class="dashboard">
     <nav class="navbar">
       <div class="dropdown">
-        <button @click="toggleDropdown" class="dropbtn">Menu</button>
+        <button @click="toggleDropdown" class="dropbtn">
+          <i class="fas fa-bars"></i>
+        </button>
         <div v-show="dropdownVisible" class="dropdown-content">
           <router-link to="/circuits" class="dropdown-link">Circuits</router-link>
           <router-link to="/constructors" class="dropdown-link">Constructors</router-link>
@@ -64,6 +66,8 @@ export default {
 </script>
 
 <style scoped>
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css');
+
 body {
   font-family: Arial, sans-serif;
   background-color: #000;
@@ -185,6 +189,10 @@ body {
     border: none;
     cursor: pointer;
     transition: background-color 0.3s ease-in-out;
+}
+
+.dropbtn i {
+  font-size: 2rem;
 }
 
 .dropbtn:hover {

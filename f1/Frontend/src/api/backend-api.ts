@@ -26,6 +26,16 @@ interface Constructors {
   country: string;
 }
 
+interface Race {
+  raceName: string;
+  circuitID: number;
+  circuitName: string;
+  Location: string;
+  date: string;
+  time: string;
+
+}
+
 export default {
   async getDrivers(): Promise<Driver[]> {
     try {
@@ -56,5 +66,14 @@ export default {
       return [];
     }
 
+  },
+  async getRace(): Promise<Race[]> {
+    try {
+      const response: AxiosResponse = await axios.get('http://localhost:8080/race');
+      return response.data;
+    } catch (error) {
+      console.error(error);
+      return [];
+    }
   },
 };
