@@ -25,7 +25,6 @@
     background-color: #000;
     color: #fff;
     overflow-x: hidden;
-    width: 100%;
   }
   
   .dashboard {
@@ -54,9 +53,8 @@
   }
   
   .nav-link:hover {
-    transform: scale(1.4);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    background-color: #c30000;
+    color: #c30000;
   }
   
   .info-section {

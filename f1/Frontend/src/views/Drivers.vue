@@ -1,6 +1,18 @@
 <template>
   <body>
     <div class="dashboard">
+      <nav class="navbar">
+        <div class="dropdown">
+          <button @click="toggleDropdown" class="dropbtn">
+            <i class="fas fa-bars"></i>
+          </button>
+          <div v-show="dropdownVisible" class="dropdown-content">
+            <router-link to="/circuits" class="dropdown-link">Circuits</router-link>
+            <router-link to="/constructors" class="dropdown-link">Constructors</router-link>
+            <router-link to="/drivers" class="dropdown-link">Drivers</router-link>
+          </div>
+        </div>
+      </nav>
       <div class="main-content">
         <section id="drivers" class="section">
           <h1>Drivers</h1>
@@ -13,8 +25,7 @@
                   <div><strong>Code:</strong> {{ driver.code }}</div>
                   <div><strong>Date of Birth:</strong> {{ driver.dateOfBirth }}</div>
                   <div><strong>Nationality:</strong> {{ driver.nationality }}</div>
-                  <div> <img :src="require(`@/Driverspicture/${driver.familyName}.png`)" alt="Driver Image"
-                      class="image-container"> </div>
+                  <div> <img :src="require(`@/Driverspicture/${driver.familyName}.png`)" alt="Driver Image" class="image-container"> </div>
                 </div>
               </div>
             </div>
@@ -31,7 +42,8 @@ import AnalyzeService from '@/router/DriverService'; // Den richtigen Pfad zu An
 export default {
   data() {
     return {
-      drivers: []
+      drivers: [],
+      dropdownVisible: false
     };
   },
   created() {
@@ -46,13 +58,17 @@ export default {
         .catch(error => {
           console.error("There was an error fetching the drivers!", error);
         });
+    },
+    toggleDropdown() {
+      this.dropdownVisible = !this.dropdownVisible;
     }
   }
 };
 </script>
 
 <style scoped>
-  
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css');
+
 body {
   font-family: Arial, sans-serif;
   background-color: #000;
@@ -72,7 +88,6 @@ body {
   flex-direction: column;
   height: 100vh;
 }
-
 
 .main-content {
   flex: 1;
@@ -126,17 +141,89 @@ body {
   margin-bottom: 0.5rem;
 }
 
-  .image-container {
-    width: 150px;
-    height: 150px; /* added height */
-    border-radius: 50%; /* added border radius */
-    overflow: hidden; /* added overflow hidden */
-    margin: 1rem auto; /* added margin */
-  }
+.image-container {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 1rem auto;
+}
 
-  .image-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* added object fit */
-  }
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #222;
+  width: 100%;
+  padding: 1rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.nav-link {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 1rem;
+  font-size: 1.5rem;
+  transition: color 0.3s ease-in-out;
+}
+
+.nav-link:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  color: #c30000;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropbtn {
+  background-color: #222;
+  color: white;
+  padding: 0.5rem;
+  font-size: 1.5rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.dropbtn i {
+  font-size: 2rem;
+}
+
+.dropbtn:hover {
+  background-color: #c30000;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #222;
+  min-width: 160px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.dropdown-content .dropdown-link {
+  color: white;
+  padding: 1rem;
+  text-decoration: none;
+  display: block;
+  font-size: 1.5rem;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.dropdown-content .dropdown-link:hover {
+  background-color: #c30000;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
 </style>

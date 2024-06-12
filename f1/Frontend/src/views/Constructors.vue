@@ -1,5 +1,15 @@
-<template class="htmls">
+<template>
     <div class="dashboard">
+        <nav class="navbar">
+            <div class="dropdown">
+                <button @click="toggleDropdown" class="dropbtn">Menu</button>
+                <div v-show="dropdownVisible" class="dropdown-content">
+                    <router-link to="/circuits" class="dropdown-link">Circuits</router-link>
+                    <router-link to="/constructors" class="dropdown-link">Constructors</router-link>
+                    <router-link to="/drivers" class="dropdown-link">Drivers</router-link>
+                </div>
+            </div>
+        </nav>
         <div class="main-content">
             <section id="constructors" class="section">
                 <h1>Constructors</h1>
@@ -27,7 +37,8 @@ import ConstructorService from '@/router/ConstructorService'; // Den richtigen P
 export default {
     data() {
         return {
-            constructors: []
+            constructors: [],
+            dropdownVisible: false
         };
     },
     created() {
@@ -42,6 +53,9 @@ export default {
                 .catch(error => {
                     console.error("There was an error fetching the constructors!", error);
                 });
+        },
+        toggleDropdown() {
+            this.dropdownVisible = !this.dropdownVisible;
         }
     }
 };
@@ -137,5 +151,73 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #222;
+    width: 100%;
+    padding: 1rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.nav-link {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 1rem;
+    font-size: 1.5rem;
+    transition: color 0.3s ease-in-out;
+}
+
+.nav-link:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    color: #c30000;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropbtn {
+    background-color: #222;
+    color: white;
+    padding: 1rem;
+    font-size: 1.5rem;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.dropbtn:hover {
+    background-color: #c30000;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #222;
+    min-width: 160px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+.dropdown-content .dropdown-link {
+    color: white;
+    padding: 1rem;
+    text-decoration: none;
+    display: block;
+    font-size: 1.5rem;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.dropdown-content .dropdown-link:hover {
+    background-color: #c30000;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
 }
 </style>
