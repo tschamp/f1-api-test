@@ -32,16 +32,17 @@
 export default {
     data() {
         return {
-            dropdownVisible: false
+            dropdownVisible: false // Zustand für die Sichtbarkeit des Dropdown-Menüs
         };
     },
     methods: {
         toggleDropdown() {
-            this.dropdownVisible = !this.dropdownVisible;
+            this.dropdownVisible = !this.dropdownVisible; // Methode zum Umschalten der Dropdown-Sichtbarkeit
         }
     }
 };
 </script>
+
 
 <style scoped>
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css');

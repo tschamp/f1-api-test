@@ -38,30 +38,30 @@
 </template>
 
 <script>
-import CircuitService from '@/router/CircuitService'; // Den richtigen Pfad zu CircuitService verwenden
+import CircuitService from '@/router/CircuitService'; // Import der CircuitService-Klasse
 
 export default {
   data() {
     return {
-      circuits: [],
-      dropdownVisible: false
+      circuits: [], // Array zur Speicherung der Streckendaten
+      dropdownVisible: false // Variable zur Steuerung der Dropdown-Sichtbarkeit
     };
   },
   created() {
-    this.fetchCircuits();
+    this.fetchCircuits(); // Beim Erstellen der Komponente werden die Streckendaten abgerufen
   },
   methods: {
     fetchCircuits() {
-      CircuitService.getCircuit()
+      CircuitService.getCircuit() // Aufruf der Methode getCircuit aus CircuitService
         .then(response => {
-          this.circuits = response.data.MRData.CircuitTable.Circuits;
+          this.circuits = response.data.MRData.CircuitTable.Circuits; // Zuweisen der abgerufenen Streckendaten zur Datenvariable circuits
         })
         .catch(error => {
-          console.error("There was an error fetching the circuits!", error);
+          console.error("There was an error fetching the circuits!", error); // Fehlerbehandlung bei Fehler beim Abrufen der Streckendaten
         });
     },
     toggleDropdown() {
-      this.dropdownVisible = !this.dropdownVisible;
+      this.dropdownVisible = !this.dropdownVisible; // Methode zum Umschalten der Dropdown-Sichtbarkeit
     }
   }
 };

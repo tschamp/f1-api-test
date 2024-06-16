@@ -48,7 +48,7 @@
 
 
 <script>
-import RaceService from '@/router/DashboardService';
+import RaceService from '@/router/RaceService';
 
 export default {
   name: 'Dashboard',

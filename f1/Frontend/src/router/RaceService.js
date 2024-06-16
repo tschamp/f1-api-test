@@ -1,9 +1,9 @@
 import axios from "axios";
 
-class RaceService {
+class DashboardService {
   getRaces() {
-    return axios.get('http://localhost:8081/race');
+    return axios.get('http://localhost:8050/race'); // Führt eine GET-Anfrage an die URL 'http://localhost:8050/race' aus.
   }
 }
 
-export default new RaceService();
+export default new DashboardService();

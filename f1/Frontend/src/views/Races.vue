@@ -51,45 +51,49 @@
 </template>
 
 <script>
-import RaceService from '@/router/RaceService'; // Den richtigen Pfad zu AnalyzeService verwenden
+import RaceService from '@/router/RaceService'; // Importiere RaceService aus dem richtigen Pfad
 
 export default {
   data() {
     return {
-      races: [],
-      dropdownVisible: false
+      races: [], // Initialisiere das races Array für die Renninformationen
+      dropdownVisible: false // Variable für die Sichtbarkeit des Dropdown-Menüs
     };
   },
   created() {
-    this.fetchRaces();
+    this.fetchRaces(); // Beim Erstellen der Komponente werden die Rennen geladen
   },
   methods: {
     fetchRaces() {
+      // Funktion zum Abrufen der Rennen über RaceService
       RaceService.getRaces()
         .then(response => {
-          const currentTime = new Date();
+          const currentTime = new Date(); // Aktuelle Zeit
+          // Sortiere die Rennen nach Datum und Zeit, um vergangene Rennen nach oben zu bringen
           this.races = response.data.MRData.RaceTable.Races.sort((a, b) => {
-            const raceADate = new Date(`${a.date}T${a.time}`);
-            const raceBDate = new Date(`${b.date}T${b.time}`);
-            if (raceADate < currentTime) return 1;
+            const raceADate = new Date(`${a.date}T${a.time}`); // Datum und Zeit des Rennens A
+            const raceBDate = new Date(`${b.date}T${b.time}`); // Datum und Zeit des Rennens B
+            if (raceADate < currentTime) return 1; // Sortierung für vergangene Rennen
             if (raceBDate < currentTime) return -1;
             return 0;
           });
         })
         .catch(error => {
-          console.error("There was an error fetching the race!", error);
+          console.error("Beim Abrufen des Rennens ist ein Fehler aufgetreten!", error); // Fehlerbehandlung
         });
     },
     toggleDropdown() {
-      this.dropdownVisible = !this.dropdownVisible;
+      this.dropdownVisible = !this.dropdownVisible; // Funktion zum Umschalten der Dropdown-Sichtbarkeit
     },
     calculateTimeRemaining(date, time) {
-      const raceDateTime = new Date(`${date}T${time}`);
-      const currentTime = new Date();
-      const timeDiff = raceDateTime.getTime() - currentTime.getTime();
+      // Funktion zur Berechnung der verbleibenden Zeit bis zum Rennen
+      const raceDateTime = new Date(`${date}T${time}`); // Datum und Zeit des Rennens
+      const currentTime = new Date(); // Aktuelle Zeit
+      const timeDiff = raceDateTime.getTime() - currentTime.getTime(); // Differenz in Millisekunden
       if (timeDiff < 0) {
-        return "Race has already passed";
+        return "Rennen ist bereits vorbei"; // Fall für vergangene Rennen
       }
+      // Berechnung von Tagen, Stunden und Minuten bis zum Rennen
       const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
       const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
@@ -103,11 +107,12 @@ export default {
       if (minutes > 0) {
         remainingTime += `${minutes}m `;
       }
-      return remainingTime.trim();
+      return remainingTime.trim(); // Rückgabe der verbleibenden Zeit im formatierten String
     }
   },
 };
 </script>
+
 
 <style scoped>
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css');

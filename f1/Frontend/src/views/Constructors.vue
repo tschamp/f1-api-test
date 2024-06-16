@@ -41,34 +41,35 @@
 </template>
 
 <script>
-import ConstructorService from '@/router/ConstructorService'; // Den richtigen Pfad zu ConstructorService verwenden
+import ConstructorService from '@/router/ConstructorService'; // Import der ConstructorService-Klasse mit dem korrekten Pfad
 
 export default {
   data() {
     return {
-      constructors: [],
-      dropdownVisible: false
+      constructors: [], // Array zur Speicherung der Konstrukteursdaten
+      dropdownVisible: false // Variable zur Steuerung der Dropdown-Sichtbarkeit
     };
   },
   created() {
-    this.fetchConstructors();
+    this.fetchConstructors(); // Beim Erstellen der Komponente werden die Konstrukteursdaten abgerufen
   },
   methods: {
     fetchConstructors() {
-      ConstructorService.getConstructors()
+      ConstructorService.getConstructors() // Aufruf der Methode getConstructors aus ConstructorService
         .then(response => {
-          this.constructors = response.data.MRData.ConstructorTable.Constructors;
+          this.constructors = response.data.MRData.ConstructorTable.Constructors; // Zuweisen der abgerufenen Konstrukteursdaten zur Datenvariable constructors
         })
         .catch(error => {
-          console.error("There was an error fetching the constructors!", error);
+          console.error("There was an error fetching the constructors!", error); // Fehlerbehandlung bei Fehler beim Abrufen der Konstrukteursdaten
         });
     },
     toggleDropdown() {
-      this.dropdownVisible = !this.dropdownVisible;
+      this.dropdownVisible = !this.dropdownVisible; // Methode zum Umschalten der Dropdown-Sichtbarkeit
     }
   }
 };
 </script>
+
 
 <style scoped>
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css');
