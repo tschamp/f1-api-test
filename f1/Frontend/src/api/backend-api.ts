@@ -26,7 +26,7 @@ interface Constructors {
   country: string;
 }
 
-interface Race {
+interface Races {
   raceName: string;
   circuitID: number;
   circuitName: string;
@@ -57,7 +57,7 @@ export default {
     }
 
   },
-  async getConstructors(): Promise<Circuit[]> {
+  async getConstructors(): Promise<Constructors[]> {
     try {
       const response: AxiosResponse = await axios.get('http://localhost:8080/constructors');
       return response.data;
@@ -67,9 +67,9 @@ export default {
     }
 
   },
-  async getRace(): Promise<Race[]> {
+  async getRaces(): Promise<Races[]> {
     try {
-      const response: AxiosResponse = await axios.get('http://localhost:8080/race');
+      const response: AxiosResponse = await axios.get('http://localhost:8080/races');
       return response.data;
     } catch (error) {
       console.error(error);

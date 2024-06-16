@@ -1,0 +1,24 @@
+@startuml
+
+package ch.timo.f1 {
+    class Backendcontroller {
+        + ResponseEntity<String> getDrivers()
+        + ResponseEntity<String> getCircuit()
+        + ResponseEntity<String> getConstructors()
+        + ResponseEntity<String> getRace()
+    }
+
+    class F1M226bApplication {
+        + main(String[] args)
+    }
+
+    class WebConfig {
+        + corsConfigurer() : WebMvcConfigurer
+    }
+}
+
+Backendcontroller -- F1M226bApplication
+F1M226bApplication --> WebConfig
+
+@enduml
+

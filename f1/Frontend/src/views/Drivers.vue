@@ -1,4 +1,5 @@
 <template>
+
   <body>
     <div class="dashboard">
       <nav class="navbar">
@@ -10,8 +11,11 @@
             <router-link to="/circuits" class="dropdown-link">Circuits</router-link>
             <router-link to="/constructors" class="dropdown-link">Constructors</router-link>
             <router-link to="/drivers" class="dropdown-link">Drivers</router-link>
+            <router-link to="/races" class="dropdown-link">Races</router-link>
+            <router-link to="/about" class="dropdown-link">About</router-link>
           </div>
         </div>
+        <router-link to="/" class="homelink"><img src="../assets/f1_logo.png" alt="Logo"></router-link>
       </nav>
       <div class="main-content">
         <section id="drivers" class="section">
@@ -20,12 +24,14 @@
             <div class="drivers-box">
               <div v-for="driver in drivers" :key="driver.driverId" class="driver">
                 <div class="driver-info">
-                  <div><strong>Driver Name:</strong> {{ driver.givenName }} {{ driver.familyName }}</div>
-                  <div><strong>Permanent Number:</strong> {{ driver.permanentNumber }}</div>
-                  <div><strong>Code:</strong> {{ driver.code }}</div>
-                  <div><strong>Date of Birth:</strong> {{ driver.dateOfBirth }}</div>
-                  <div><strong>Nationality:</strong> {{ driver.nationality }}</div>
-                  <div> <img :src="require(`@/Driverspicture/${driver.familyName}.png`)" alt="Driver Image" class="image-container"> </div>
+                  <hr>
+                  <div class="driver-info-mid"> {{ driver.givenName }}</div>
+                  <div class="driver-info-data"><strong>{{ driver.familyName }}</strong></div>
+                  <hr>
+                  <div class="driver-info-small">{{ driver.dateOfBirth }}</div>
+                  <div class="driver-info-small">{{ driver.nationality }}</div>
+                  <div><img :src="require(`@/Driverspicture/${driver.familyName}.png`)" alt="Driver Image"
+                      class="image-container"></div>
                 </div>
               </div>
             </div>
@@ -35,6 +41,9 @@
     </div>
   </body>
 </template>
+
+
+
 
 <script>
 import AnalyzeService from '@/router/DriverService'; // Den richtigen Pfad zu AnalyzeService verwenden
@@ -69,16 +78,22 @@ export default {
 <style scoped>
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css');
 
+template {
+  margin: 0px;
+  padding: 0px;
+}
+
 body {
   font-family: Arial, sans-serif;
-  background-color: #000;
-  color: #fff;
+  background-color: white;
+  color: #000;
   overflow-x: hidden;
+  padding: 0px;
+  margin: 0px;
 }
 
 .section {
-  background-color: #000;
-  padding: 2rem;
+  background-color: #fff;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
@@ -86,21 +101,23 @@ body {
 .dashboard {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 99vh;
+  width: 99vw;
 }
 
 .main-content {
   flex: 1;
   overflow-y: auto;
+  background-color: #fff;
 }
 
 .section h1 {
-  border-bottom: 2px solid #c30000;
+  border-bottom: 4px solid #e10600;
   padding-bottom: 0.5rem;
   font-size: 4rem;
   font-weight: bold;
   margin-top: 0;
-  color: white;
+  color: black;
 }
 
 .content-wrapper {
@@ -117,36 +134,53 @@ body {
 }
 
 .driver {
-  background-color: #222;
+  background-color: #fff;
   padding: 1rem;
+  padding-bottom: 0;
   margin-right: auto;
   margin-left: auto;
   border-radius: 10px;
+  border-top-left-radius: 0%;
+  border-bottom-right-radius: 0%;
   width: 30%;
+  color: #000;
   transition: all 0.3s ease-in-out;
+  border-top: 1px solid black;
+  border-right: 1px solid black;
 }
 
-.driver:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  background-color: #c30000;
-}
 
 .driver-info {
-  color: #fff;
-  font-size: 20px;
+  color: #000;
 }
 
 .driver-info div {
   margin-bottom: 0.5rem;
+
 }
 
+.driver-info-data {
+  text-align: start;
+  font-size: 30px;
+  line-height: 50%;
+}
+
+.driver-info-mid {
+  text-align: start;
+  font-size: 15px;
+}
+
+.driver-info-small {
+  text-align: start;
+  font-size: 13px;
+}
+
+
 .image-container {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  border-radius: 30%;
   overflow: hidden;
-  margin: 1rem auto;
 }
 
 .image-container img {
@@ -159,32 +193,19 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #222;
+  background-color: #e10600;
   width: 100%;
   padding: 1rem;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
-.nav-link {
-  color: #fff;
-  text-decoration: none;
-  margin: 0 1rem;
-  font-size: 1.5rem;
-  transition: color 0.3s ease-in-out;
-}
-
-.nav-link:hover {
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  color: #c30000;
-}
-
-.dropdown {
-  position: relative;
-  display: inline-block;
+.navbar-left {
+  display: flex;
+  align-items: center;
 }
 
 .dropbtn {
-  background-color: #222;
+  background-color: #e10600;
   color: white;
   padding: 0.5rem;
   font-size: 1.5rem;
@@ -194,12 +215,9 @@ body {
 }
 
 .dropbtn i {
-  font-size: 2rem;
+  font-size: 3rem;
 }
 
-.dropbtn:hover {
-  background-color: #c30000;
-}
 
 .dropdown-content {
   display: none;
@@ -207,6 +225,7 @@ body {
   background-color: #222;
   min-width: 160px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
   z-index: 1;
 }
 
@@ -216,14 +235,37 @@ body {
   text-decoration: none;
   display: block;
   font-size: 1.5rem;
+  border-radius: 10px;
   transition: background-color 0.3s ease-in-out;
 }
 
 .dropdown-content .dropdown-link:hover {
-  background-color: #c30000;
+  background-color: #e10600;
 }
 
 .dropdown:hover .dropdown-content {
   display: block;
+}
+
+.homelink {
+  display: flex;
+  align-items: center;
+  background-color: #e10600;
+  color: white;
+  padding: 1rem;
+  font-size: 2rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.5s ease-in-out;
+  margin-right: 100px;
+}
+
+.homelink img {
+  height: 50px;
+  /* Adjust size as needed */
+}
+
+.homelink:hover {
+  background-color: #e10600;
 }
 </style>

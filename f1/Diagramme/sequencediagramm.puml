@@ -1,0 +1,19 @@
+@startuml
+actor User
+participant "Driver.vue" as DriverVue
+participant "DriverService.js" as DriverService
+participant "F1M226bApplication.java" as F1M226bApplication
+participant "Backendcontroller" as BackendController
+participant "Externe API" as ExternalAPI
+
+
+User -> DriverVue: Open Driver.vue
+DriverVue -> DriverService: fetchDrivers()
+DriverService -> BackendController: GET /drivers
+BackendController -> ExternalAPI: GET http://ergast.com/api/f1/2024/drivers.json
+ExternalAPI -> BackendController: Response with Drivers Data
+BackendController -> F1M226bApplication: upload drivers.json to http://localhost:8081/drivers
+F1M226bApplication -> DriverService: Return Drivers Data
+DriverService -> DriverVue: Return Drivers Data
+DriverVue -> User: Display Drivers
+@enduml

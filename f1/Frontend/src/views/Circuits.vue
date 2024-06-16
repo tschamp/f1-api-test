@@ -1,4 +1,4 @@
-<template class="htmls">
+<template>
   <div class="dashboard">
     <nav class="navbar">
       <div class="dropdown">
@@ -9,8 +9,11 @@
           <router-link to="/circuits" class="dropdown-link">Circuits</router-link>
           <router-link to="/constructors" class="dropdown-link">Constructors</router-link>
           <router-link to="/drivers" class="dropdown-link">Drivers</router-link>
+          <router-link to="/races" class="dropdown-link">Races</router-link>
+          <router-link to="/about" class="dropdown-link">About</router-link>
         </div>
       </div>
+      <router-link to="/" class="homelink"><img src="../assets/f1_logo.png" alt="Logo"></router-link>
     </nav>
     <div class="main-content">
       <section id="circuits" class="section">
@@ -23,8 +26,8 @@
                 <div><strong>Location:</strong> {{ circuit.Location.locality }}, {{ circuit.Location.country }}</div>
                 <div><strong>Latitude:</strong> {{ circuit.Location.lat }}</div>
                 <div><strong>Longitude:</strong> {{ circuit.Location.long }}</div>
-                <div> <img :src="require(`@/Countrypicture/${circuit.Location.country}.png`)"
-                    alt="Country Image of Circuit" class="image-container"> </div>
+                <div><img :src="require(`@/Countrypicture/${circuit.Location.country}.png`)"
+                    alt="Country Image of Circuit" class="image-container"></div>
               </div>
             </div>
           </div>
@@ -35,7 +38,7 @@
 </template>
 
 <script>
-import CircuitService from '@/router/CircuitService'; // Den richtigen Pfad zu AnalyzeService verwenden
+import CircuitService from '@/router/CircuitService'; // Den richtigen Pfad zu CircuitService verwenden
 
 export default {
   data() {
@@ -54,12 +57,11 @@ export default {
           this.circuits = response.data.MRData.CircuitTable.Circuits;
         })
         .catch(error => {
-          console.error("There was an error fetching the circuit!", error);
+          console.error("There was an error fetching the circuits!", error);
         });
-        
     },
     toggleDropdown() {
-            this.dropdownVisible = !this.dropdownVisible;
+      this.dropdownVisible = !this.dropdownVisible;
     }
   }
 };
@@ -70,14 +72,15 @@ export default {
 
 body {
   font-family: Arial, sans-serif;
-  background-color: #000;
-  color: #fff;
+  background-color: white;
+  color: #000;
   overflow-x: hidden;
+  padding: 0;
+  margin: 0;
 }
 
 .section {
-  background-color: #000;
-  padding: 2rem;
+  background-color: #fff;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
@@ -85,22 +88,23 @@ body {
 .dashboard {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 99vh;
+  width: 99vw;
 }
-
 
 .main-content {
   flex: 1;
   overflow-y: auto;
+  background-color: #fff;
 }
 
 .section h1 {
-  border-bottom: 2px solid #c30000;
+  border-bottom: 4px solid #e10600;
   padding-bottom: 0.5rem;
   font-size: 4rem;
   font-weight: bold;
   margin-top: 0;
-  color: white;
+  color: black;
 }
 
 .content-wrapper {
@@ -117,24 +121,23 @@ body {
 }
 
 .circuit {
-  background-color: #222;
+  background-color: #fff;
   padding: 1rem;
+  padding-bottom: 0;
   margin-right: auto;
   margin-left: auto;
   border-radius: 10px;
+  border-top-left-radius: 0;
+  border-bottom-right-radius: 0;
   width: 30%;
+  color: #000;
   transition: all 0.3s ease-in-out;
-}
-
-.circuit:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  background-color: #c30000;
+  border-top: 1px solid black;
+  border-right: 1px solid black;
 }
 
 .circuit-info {
-  color: #fff;
-  font-size: 20px;
+  color: #000;
 }
 
 .circuit-info div {
@@ -142,7 +145,9 @@ body {
 }
 
 .image-container {
-  height: 150px;
+  border: 1px solid black;
+  height: 200px;
+  width: 300px;
   overflow: hidden;
   margin: 1rem auto;
 }
@@ -154,74 +159,75 @@ body {
 }
 
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #222;
-    width: 100%;
-    padding: 1rem;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-}
-
-.nav-link {
-    color: #fff;
-    text-decoration: none;
-    margin: 0 1rem;
-    font-size: 1.5rem;
-    transition: color 0.3s ease-in-out;
-}
-
-.nav-link:hover {
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    color: #c30000;
-}
-
-.dropdown {
-    position: relative;
-    display: inline-block;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #e10600;
+  width: 100%;
+  padding: 1rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .dropbtn {
-    background-color: #222;
-    color: white;
-    padding: 1rem;
-    font-size: 1.5rem;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
+  background-color: #e10600;
+  color: white;
+  padding: 0.5rem;
+  font-size: 1.5rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
 }
 
 .dropbtn i {
-  font-size: 2rem;
-}
-
-.dropbtn:hover {
-    background-color: #c30000;
+  font-size: 3rem;
 }
 
 .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #222;
-    min-width: 160px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    z-index: 1;
+  display: none;
+  position: absolute;
+  background-color: #222;
+  min-width: 160px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  z-index: 1;
 }
 
 .dropdown-content .dropdown-link {
-    color: white;
-    padding: 1rem;
-    text-decoration: none;
-    display: block;
-    font-size: 1.5rem;
-    transition: background-color 0.3s ease-in-out;
+  color: white;
+  padding: 1rem;
+  text-decoration: none;
+  display: block;
+  font-size: 1.5rem;
+  border-radius: 10px;
+  transition: background-color 0.3s ease-in-out;
 }
 
 .dropdown-content .dropdown-link:hover {
-    background-color: #c30000;
+  background-color: #e10600;
 }
 
 .dropdown:hover .dropdown-content {
-    display: block;
+  display: block;
+}
+
+.homelink {
+  display: flex;
+  align-items: center;
+  background-color: #e10600;
+  color: white;
+  padding: 1rem;
+  font-size: 2rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.5s ease-in-out;
+  margin-right: 100px;
+}
+
+.homelink img {
+  height: 50px;
+}
+
+.homelink:hover {
+  background-color: #e10600;
 }
 </style>
